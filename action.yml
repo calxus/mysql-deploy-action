@@ -1,0 +1,32 @@
+name: 'MySQL Deploy Action'
+description: 'Action used to deploy MySQL script'
+inputs:
+  DATABASE_HOST:
+    description: 'Hostname used to connect to database'
+    required: true
+  DATABASE_PORT:
+    description: 'Port used to connect to database'
+    required: false
+    default: '3306'
+  DATABASE_NAME:
+    description: 'Name of database to connect to'
+    required: true
+  DATABASE_USERNAME:
+    description: 'Username used to connect to database'
+    required: true
+  DATABASE_PASSWORD:
+    description: 'Password used to connect to database'
+    required: true
+  DATABASE_SCRIPT:
+    description: 'Script run on database'
+    required: true
+runs:
+  using: 'docker'
+  image: 'Dockerfile'
+  args:
+    - ${{ inputs.DATABASE_HOST }}
+    - ${{ inputs.DATABASE_PORT }}
+    - ${{ inputs.DATABASE_NAME }}
+    - ${{ inputs.DATABASE_USERNAME }}
+    - ${{ inputs.DATABASE_PASSWORD }}
+    - ${{ inputs.DATABASE_SCRIPT }}
